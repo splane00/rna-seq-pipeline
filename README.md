@@ -10,6 +10,8 @@ GEO: GSE81698
 Study Type	Transcriptome Analysis
 This repository contains a modular and reproducible RNA-seq differential expression pipeline built using public data from SRP075484 (BioProject PRJNA322328). The project includes four treatment-condition RNA-seq samples (no explicit control). The pipeline uses modern, lightweight tools (fastp, Salmon, MultiQC) and follows current best practices for quantification-based RNA-seq workflows.
 
+#### [Reference Page](https://github.com/splane00/rna-seq-pipeline/sources)
+
 ## Repository Structure
 
 ```text
