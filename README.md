@@ -4,6 +4,34 @@
 **Dataset:** SRP075484 – BET inhibitor treatment (GEO: GSE81698)  
 **Citations:** [/sources.md](https://github.com/splane00/rna-seq-pipeline/blob/main/sources.md)
 
+## Quick Start
+1. Clone the repository
+```
+git clone https://github.com/splane00/rna-seq-pipeline.git
+cd rna-seq-pipeline
+```
+2. Create the conda environment
+```
+conda env create -f environment.yml
+conda activate rna-seq-pipeline
+```
+3. Run the pipeline from the repo root  
+```
+bash scripts/run_pipeline.sh
+```
+The pipeline performs:
+fastp QC + adapter trimming
+
+**Requirements:**
+- macOS or Linux
+- Salmon ≥ 1.10
+- fastp
+- MultiQC
+- Bash
+
+Outputs are written to:  
+results/  
+
 ## Overview
 This repository contains a modular, reproducible RNA-seq preprocessing and normalization pipeline built around lightweight modern tools:  
 - fastp for QC + trimming. 
@@ -62,33 +90,6 @@ flowchart TD
   E --> F[DESeq2 normalization + VST]
   F --> G[PCA + QC plots]
 ```
-### Installation
-1. Clone the repository
-git clone https://github.com/splane00/rna-seq-pipeline.git
-cd rna-seq-pipeline
-
-2. Create the conda environment
-conda env create -f environment.yml
-conda activate rna-seq-pipeline
-
-### Run the Pipeline
-From the repository root:
-```
-bash scripts/run_pipeline.sh
-```
-
-The pipeline performs:
-fastp QC + adapter trimming
-
-Reference download (if not present):  
-Salmon indexing  
-Salmon quantification for all samples  
-tximport aggregation  
-DESeq2 normalization + variance stabilization  
-PCA + sample distance heatmap generation  
-
-Outputs are written to:  
-results/  
 
 ### Generated Outputs
 ```
