@@ -116,9 +116,7 @@ Instead, the pipeline focuses on:
 - reproducible workflow design
 The structure supports DE testing if a replicated dataset is later added.
 
-### Future Enhancements
-- Add MultiQC summarization
-- Add interactive Shiny QC explorer
-- Implement Nextflow/Snakemake version
-- Add test dataset for 1-minute validation
-- Add GitHub Actions CI for pipeline syntax + environment checks
+### Future Enhancements  
+v0.3.0 – Add tximport + DESeq2 differential expression  
+v0.4.0 – Add plots (PCA, heatmap, MA plot, volcano)  
+v0.5.0 – Add Snakemake or Nextflow version  
