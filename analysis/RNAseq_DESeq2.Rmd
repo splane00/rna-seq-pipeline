@@ -1,0 +1,57 @@
+---
+title: "RNA-seq DESeq2 Analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(tximport)
+library(readr)
+library(DESeq2)
+library(ggplot2)
+library(pheatmap)
+```
+
+## Sample metadata
+
+```{r}
+samples <- read_tsv("metadata/samples.tsv")
+knitr::kable(samples)
+```
+
+## Import Salmon quantifications
+
+```{r}
+files <- file.path("data/quant", samples$srr, "quant.sf")
+names(files) <- samples$sample
+
+txi <- tximport(files, type = "salmon", txOut = TRUE)
+```
+
+## Build DESeq2 dataset and run
+
+```{r}
+coldata <- as.data.frame(samples)
+rownames(coldata) <- coldata$sample
+dds <- DESeqDataSetFromTximport(txi, colData = coldata, design = ~ condition)
+dds <- DESeq(dds)
+rld <- rlog(dds, blind = FALSE)
+```
+
+## PCA
+
+```{r}
+plotPCA(rld, intgroup = "condition")
+```
+
+## Example pairwise comparison
+
+```{r}
+res <- results(dds, contrast = c("condition", "treatment1", "treatment2"))
+res_shrunk <- lfcShrink(dds, contrast = c("condition", "treatment1", "treatment2"), type = "apeglm")
+head(res_shrunk)
+```
+
+## Save outputs (optional)
+
+You can run the standalone `R` script `analysis/RNAseq_DESeq2.R` to run the pipeline non-interactively and generate plots in `results/plots/` and tables in `results/deseq2/`.

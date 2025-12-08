@@ -32,6 +32,11 @@ data/*_trimmed*
 results/*_fastqc.html
 results/*_fastqc.zip
 
+# Salmon quantification outputs and trimmed reads
+data/quant/
+data/trimmed/
+data/reference/salmon_index/
+
 #  Alignment Indexes 
 # (STAR, HISAT2, Salmon, Kallisto — all huge and should never be committed)
 index/

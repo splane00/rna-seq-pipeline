@@ -1,0 +1,28 @@
+name: rna-seq-pipeline
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - r-base=4.2
+  - r-essentials
+  - r-tidyverse
+  - r-pheatmap
+  - bioconductor-deseq2
+  - bioconductor-tximport
+  - bioconductor-apeglm
+  - bioconductor-org.hs.eg.db
+  - bioconductor-clusterprofiler
+  - bioconductor-fgsea
+  - r-ggplot2
+  - r-readr
+  - r-knitr
+  - r-markdown
+  - pip
+  - pip:
+    - snakemake
+
+# Notes:
+# - Some Bioconductor packages may install via BiocManager inside R instead of conda.
+# - Adjust R version and package pins to match your system.

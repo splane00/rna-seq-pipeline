@@ -3,24 +3,14 @@ Samantha Lane
 M.S. Bioinformatics student, Johns Hopkins University
 
 ## Dataset Overview
-
 GSE81698 – “Epigenetic targeting of immune checkpoint PD-L1 by BET bromodomain inhibition”
 Identifiers	SRA: SRP075484
 BioProject: PRJNA322328
 GEO: GSE81698
 Study Type	Transcriptome Analysis
-
-Abstract	Epigenetic regulators have emerged as exciting targets for cancer therapy. Additionally, restoration of antitumor immunity by blocking the PD-L1 signaling using antibodies has proven to be beneficial in cancer therapy. Here we show that BET bromodomain inhibition suppresses PD-L1 expression and restores antitumor immunity in ovarian cancer. CD274 (encoding PD-L1) is a direct target of BRD4-mediated gene transcription. In mouse models, treatment with the BET inhibitor JQ1 significantly reduced PD-L1 expression on tumor cells and tumor-associated dendritic cells and macrophages, which correlated with an increase in the activity of antitumor cytotoxic T cells. Together, these data demonstrate an epigenetic approach to block PD-L1 signaling to restore antitumor immunity. Given the fact that BET inhibitors have been proven safe with manageable reversible toxicity in clinical trials, our findings indicate that pharmacological BET inhibitors represent a novel treatment strategy for targeting PD-L1 expression. Overall design: RNA-seq for JQ1 treated and shBRD4 knockdown cells with controls
-
-🧬 RNA-seq Differential Expression Pipeline
-
-Dataset: SRP075484 | Status: Raw → QC → Trimming → Salmon Quant Complete
-
 This repository contains a modular and reproducible RNA-seq differential expression pipeline built using public data from SRP075484 (BioProject PRJNA322328). The project includes four treatment-condition RNA-seq samples (no explicit control). The pipeline uses modern, lightweight tools (fastp, Salmon, MultiQC) and follows current best practices for quantification-based RNA-seq workflows.
 
-
-
-## Repository Structure (So Far)
+## Repository Structure
 rna-seq-pipeline/
 │
 ├── data/
@@ -40,7 +30,6 @@ Quantification	Salmon (v1.10.3)	Alignment-free transcript quantification
 
 The Salmon installation lives in a dedicated conda environment:
 conda activate salmon_env
-
 
 ## Pipeline Components
 
@@ -129,3 +118,29 @@ This pipeline will eventually include full reproducibility and possibly a Snakef
 
 
 ## Results Preview
+
+---
+
+## **DESeq2 Quickstart**
+
+A full DESeq2 walkthrough is available in `docs/DESeq2.md`. The repository also includes a runnable script and an RMarkdown report to perform differential expression, PCA, heatmaps, and volcano plots from Salmon quantifications.
+
+Quick start (create environment and run):
+
+```bash
+# create environment from the provided template (adjust channels/versions if needed)
+conda env create -f environment.yml
+conda activate rna-seq-pipeline
+
+# inside R (if needed) install Bioconductor packages
+R -e "if (!requireNamespace('BiocManager', quietly=TRUE)) install.packages('BiocManager'); BiocManager::install(c('tximport','DESeq2','apeglm','org.Hs.eg.db'))"
+
+# run non-interactive analysis (outputs -> results/deseq2/ and results/plots/)
+Rscript analysis/RNAseq_DESeq2.R
+```
+
+Notes:
+
+- Edit `metadata/samples.tsv` before running to match your samples and conditions.
+- The script expects Salmon outputs at `data/quant/<SRR>/quant.sf`.
+- For gene-level import add a `tx2gene` mapping and set `txOut = FALSE` in `tximport()`.
