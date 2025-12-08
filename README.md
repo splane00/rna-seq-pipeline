@@ -80,16 +80,6 @@ flowchart TD
     C --> I
 
 ```
-
-
-Summary of Steps
-Step	Description	Tool
-1. Trimming & QC	Remove adapters, filter low-quality reads, generate HTML/JSON QC reports	fastp
-2. Aggregated QC	Compile fastp and Salmon QC metrics	MultiQC
-3. Reference Index	Build k-mer index for quasi-mapping	Salmon
-4. Quantification	Estimate transcript-level abundance (TPM & counts)	Salmon
-5. Import for DE	Summarize transcript counts to genes	tximport
-6. Differential Expression	Fit model, shrink LFCs, generate tables and plots	DESeq2
 ### Quality Control (FastQC + MultiQC)  
 - FastQC run on all raw FASTQs:  
   fastqc *.fastq --outdir ../qc/raw_fastqc  
