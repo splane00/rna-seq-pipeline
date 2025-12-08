@@ -91,16 +91,18 @@ data/qc/**/multiqc*
 # Salmon index
 data/reference/salmon_index/
 
-# Raw and trimmed FASTQs
+# Raw data
 data/raw/
 data/trimmed/
 
+# QC outputs
+data/qc/
+
+# Salmon index
+data/reference/salmon_index/
+
 # Results
 results/
-
-# R analysis output
-analysis/*.html
-analysis/*.md
 
 # System files
 .DS_Store
