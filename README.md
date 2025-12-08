@@ -46,15 +46,50 @@ rna-seq-pipeline/
 | Import / summarization | tximport        | Import Salmon quantifications into DESeq2    |
 
 
-## Pipeline Components
+## Pipeline Overview
 
-The four paired-end samples from SRP075484 were downloaded using:  
-fasterq-dump --split-files SRR15074527  
-fasterq-dump --split-files SRR15074528  
-fasterq-dump --split-files SRR15074529  
-fasterq-dump --split-files SRR15074530  
-Outputs stored in data/raw/  
+This RNA-seq pipeline processes raw FASTQ files through trimming, quality control, transcript quantification, and differential expression analysis using modern, lightweight tools (fastp, Salmon, tximport, DESeq2). The workflow is modular, reproducible, and designed for quantification-based RNA-seq best practices.
 
+### Workflow Diagram  
+
+```mermaid
+flowchart TD
+
+    A[Raw FASTQ Files]
+    B[Reference Transcriptome FASTA]
+    C[tx2gene Annotation]
+
+    D[fastp - trimming and filtering]
+    E[fastp QC reports]
+    F[MultiQC aggregated QC]
+
+    G[Salmon index]
+    H[Salmon quantification]
+
+    I[tximport]
+    J[DESeq2 differential expression]
+    K[DE results table]
+    L[Plots - PCA and Volcano]
+
+    %% Connections
+    A --> D --> E --> F
+    B --> G --> H
+    D --> H
+    H --> I --> J --> K
+    J --> L
+    C --> I
+
+```
+
+
+Summary of Steps
+Step	Description	Tool
+1. Trimming & QC	Remove adapters, filter low-quality reads, generate HTML/JSON QC reports	fastp
+2. Aggregated QC	Compile fastp and Salmon QC metrics	MultiQC
+3. Reference Index	Build k-mer index for quasi-mapping	Salmon
+4. Quantification	Estimate transcript-level abundance (TPM & counts)	Salmon
+5. Import for DE	Summarize transcript counts to genes	tximport
+6. Differential Expression	Fit model, shrink LFCs, generate tables and plots	DESeq2
 ### Quality Control (FastQC + MultiQC)  
 - FastQC run on all raw FASTQs:  
   fastqc *.fastq --outdir ../qc/raw_fastqc  
