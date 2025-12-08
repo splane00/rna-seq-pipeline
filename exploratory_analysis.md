@@ -1,6 +1,6 @@
 # Exploratory Data Analysis
 
-To assess data quality, global transcriptomic structure, and the biological consistency of the four experimental conditions (DMSO, JQ1, BRD4.WT, shBRD4), we performed a series of exploratory analyses on Salmon-quantified RNA-seq data, including variance-stabilizing transformation (VST), principal component analysis (PCA), hierarchical clustering, and sample-to-sample distance visualization.
+To assess data quality, global transcriptomic structure, and the biological consistency of the four experimental conditions (DMSO, JQ1, BRD4.WT, shBRD4), I performed a series of exploratory analyses on Salmon-quantified RNA-seq data, including variance-stabilizing transformation (VST), principal component analysis (PCA), hierarchical clustering, and sample-to-sample distance visualization.
 
 ## Figures
 ![Top 500 Heatmap](figures/heatmap_top500.png)

@@ -2,6 +2,7 @@
 .DS_Store
 .vscode/
 *.swp
+*.md
 
 #  Environment Files 
 venv/
@@ -80,3 +81,26 @@ results/*.txt
 *.gz
 *.tar
 *.tar.gz
+
+# QC outputs
+data/qc/*.html
+data/qc/*.json
+data/qc/multiqc*
+data/qc/**/multiqc*
+
+# Salmon index
+data/reference/salmon_index/
+
+# Raw and trimmed FASTQs
+data/raw/
+data/trimmed/
+
+# Results
+results/
+
+# R analysis output
+analysis/*.html
+analysis/*.md
+
+# System files
+.DS_Store

@@ -4,7 +4,6 @@
 **Dataset:** SRP075484 – BET inhibitor treatment (GEO: GSE81698)  
 **Citations:** [/sources.md](https://github.com/splane00/rna-seq-pipeline/blob/main/sources.md)
 
-
 ## Overview
 This repository contains a modular, reproducible RNA-seq preprocessing and normalization pipeline built around lightweight modern tools:  
 - fastp for QC + trimming. 

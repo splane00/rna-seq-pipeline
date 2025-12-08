@@ -1,4 +1,4 @@
-# APA Reference List for Your Pipeline Data
+# References
 
 ## SRP075484 RNA-seq Dataset (GSE81698)
 
