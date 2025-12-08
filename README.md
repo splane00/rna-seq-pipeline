@@ -1,14 +1,14 @@
-# Comprehensive RNA-seq Pipeline with fastp, Salmon, and DESeq2 (SRP075484)
-Samantha Lane
-M.S. Bioinformatics student, Johns Hopkins University
+# RNA-seq Differential Expression Pipeline (Salmon + DESeq2)
 
-## Dataset Overview
-GSE81698 – “Epigenetic targeting of immune checkpoint PD-L1 by BET bromodomain inhibition”
-Identifiers	SRA: SRP075484
-BioProject: PRJNA322328
-GEO: GSE81698
-Study Type	Transcriptome Analysis
-This repository contains a modular and reproducible RNA-seq differential expression pipeline built using public data from SRP075484 (BioProject PRJNA322328). The project includes four treatment-condition RNA-seq samples (no explicit control). The pipeline uses modern, lightweight tools (fastp, Salmon, MultiQC) and follows current best practices for quantification-based RNA-seq workflows.
+**Author:** Samantha Lane, M.S. Bioinformatics at Johns Hopkins University  
+
+A modular, reproducible RNA-seq differential expression pipeline using
+fastp for QC and trimming, Salmon for alignment-free quantification,
+and DESeq2 for downstream statistical analysis.
+
+The pipeline is demonstrated on public RNA-seq data from SRP075484
+(BioProject PRJNA322328; GEO GSE81698), consisting of four treatment-condition
+samples with no explicit control group.
 
 #### [Reference Page](https://github.com/splane00/rna-seq-pipeline/sources)
 
@@ -35,14 +35,16 @@ rna-seq-pipeline/
 ```
 
 ## Tools Used
-Step	Tool	Purpose
-QC	FastQC	Per-sample quality inspection
-QC summary	MultiQC	Aggregated QC reporting
-Trimming	fastp	Adapter trimming & quality filtering
-Quantification	Salmon (v1.10.3)	Alignment-free transcript quantification
 
-The Salmon installation lives in a dedicated conda environment:
-conda activate salmon_env
+| Stage               | Tool               | Purpose                                      |
+|---------------------|--------------------|----------------------------------------------|
+| QC                  | FastQC             | Per-sample read quality assessment           |
+| QC summary          | MultiQC            | Aggregated QC report across all samples      |
+| Trimming            | fastp              | Adapter removal and quality filtering        |
+| Quantification      | Salmon (v1.10.3)   | Alignment-free transcript quantification     |
+| Differential expression | DESeq2         | Statistical testing and normalization        |
+| Import / summarization | tximport        | Import Salmon quantifications into DESeq2    |
+
 
 ## Pipeline Components
 
@@ -93,16 +95,16 @@ Index stored in:data/reference/salmon_index/
 
 ### Salmon Quantification (Alignment-Free)
 Quantified all 4 paired-end samples:
-```text
+```bash
 for SRR in SRR15074527 SRR15074528 SRR15074529 SRR15074530
 do
   salmon quant \
-    -i /Users/samilane/Documents/VSCode/Research/rna-seq-pipeline/data/reference/salmon_index \
+    -i data/reference/salmon_index \
     -l A \
-    -1 ${SRR}_1.trimmed.fastq \
-    -2 ${SRR}_2.trimmed.fastq \
+    -1 data/trimmed/${SRR}_1.trimmed.fastq \
+    -2 data/trimmed/${SRR}_2.trimmed.fastq \
     -p 8 \
-    -o /Users/samilane/Documents/VSCode/Research/rna-seq-pipeline/data/quant/${SRR}
+    -o data/quant/${SRR}
 done
 ```
 
@@ -114,18 +116,11 @@ aux_info/
 
 These quant.sf files will be used for DESeq2.  
 
-Next Steps:
-1. Install MultiQC in working env for trimmed QC summary
-2. Create metadata table (samples.tsv)
-3. Import Salmon quantifications into tximport
-4. Build DESeq2 dataset
-5. Perform:
-- differential expression
-- PCA
-- sample distance heatmap
-- volcano plots
-- ranked gene lists
-- per-condition comparisons
+## Planned Extensions
+- Integrate tximport for gene-level counts
+- Perform DESeq2-based differential expression
+- Generate PCA, heatmaps, and volcano plots
+- Add a Snakemake or Nextflow workflow for full reproducibility
 
 ### Notes
 All steps are run on macOS using conda environments and Homebrew-installed tools.
