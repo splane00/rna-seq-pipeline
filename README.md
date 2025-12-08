@@ -11,15 +11,28 @@ Study Type	Transcriptome Analysis
 This repository contains a modular and reproducible RNA-seq differential expression pipeline built using public data from SRP075484 (BioProject PRJNA322328). The project includes four treatment-condition RNA-seq samples (no explicit control). The pipeline uses modern, lightweight tools (fastp, Salmon, MultiQC) and follows current best practices for quantification-based RNA-seq workflows.
 
 ## Repository Structure
+
+## Repository Structure
+
+```text
 rna-seq-pipeline/
-│
 ├── data/
-│   ├── raw/                     # raw FASTQs from SRA
-│   ├── trimmed/                 # fastp-trimmed FASTQs
-│   ├── quant/                   # Salmon quantification outputs
-│   └── reference/               # GENCODE transcriptome + Salmon index
-│
-└── README.md
+│   ├── raw/
+│   ├── trimmed/
+│   └── reference/
+├── scripts/
+│   ├── qc_fastp.sh
+│   ├── salmon_index.sh
+│   └── salmon_quant.sh
+├── results/
+│   ├── qc/
+│   └── quant/
+├── config/
+│   └── samples.tsv
+├── .gitignore
+├── README.md
+└── environment.yml
+```
 
 ## Tools Used
 Step	Tool	Purpose
