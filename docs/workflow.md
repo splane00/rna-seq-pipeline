@@ -1,3 +1,4 @@
+```mermaid
 flowchart TD
     A[FASTQ Files] --> B[QC: FastQC]
     B --> C[Trim Reads]
@@ -5,3 +6,4 @@ flowchart TD
     D --> E[Count Reads with featureCounts]
     E --> F[DESeq2 Differential Expression]
     F --> G[Plots: Volcano, PCA, Heatmap]
+```
