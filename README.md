@@ -10,6 +10,8 @@ The pipeline is demonstrated on public RNA-seq data from SRP075484
 (BioProject PRJNA322328; GEO GSE81698), consisting of four treatment-condition
 samples with no explicit control group.
 
+#### Results Preview
+
 #### [Reference Page](https://github.com/splane00/rna-seq-pipeline/sources.md)
 
 ## Repository Structure
