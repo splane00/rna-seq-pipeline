@@ -1,0 +1,77 @@
+#  OS & Editor Files 
+.DS_Store
+.vscode/
+*.swp
+
+#  Environment Files 
+venv/
+.venv/
+__pycache__/
+.Rhistory
+.Rproj.user/
+.RData
+.Ruserdata
+renv/
+renv.lock
+
+#  Raw & Processed Sequencing Data 
+data/*.fastq
+data/*.fastq.gz
+data/*.fq
+data/*.fq.gz
+data/*.sra
+data/*.bam
+data/*.sam
+data/*.cram
+data/*.bai
+
+#  Intermediate QC/Trim Outputs 
+data/*_fastqc.html
+data/*_fastqc.zip
+data/*_trimmed*
+results/*_fastqc.html
+results/*_fastqc.zip
+
+#  Alignment Indexes 
+# (STAR, HISAT2, Salmon, Kallisto — all huge and should never be committed)
+index/
+*.idx
+*.ht2
+*.fa.*
+*.gtf.*
+*.fai
+*.dict
+*.gzi
+
+# STAR index naming patterns
+*STARgenome*
+*Genome*
+*SA*
+*SAindex*
+
+#  Logs & Temp Files 
+*.log
+*.tmp
+*.out
+*.err
+
+#  Conda 
+.env/
+*.conda
+*.yaml~
+
+#  Figures that are auto-generated 
+figures/*.png
+figures/*.jpg
+figures/*.pdf
+
+#  Large Results (optional — keep if you want the outputs tracked) 
+results/*.tsv
+results/*.csv
+results/*.txt
+
+#  Misc 
+*.zip
+*.gz
+*.tar
+*.tar.gz

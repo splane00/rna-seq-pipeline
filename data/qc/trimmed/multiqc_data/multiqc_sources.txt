@@ -1,0 +1,5 @@
+Module	Section	Sample Name	Source
+fastp	all_sections	SRR15074527	/Users/samilane/Documents/VSCode/Research/rna-seq-pipeline/data/trimmed/SRR15074527.fastp.json
+fastp	all_sections	SRR15074528	/Users/samilane/Documents/VSCode/Research/rna-seq-pipeline/data/trimmed/SRR15074528.fastp.json
+fastp	all_sections	SRR15074529	/Users/samilane/Documents/VSCode/Research/rna-seq-pipeline/data/trimmed/SRR15074529.fastp.json
+fastp	all_sections	SRR15074530	/Users/samilane/Documents/VSCode/Research/rna-seq-pipeline/data/trimmed/SRR15074530.fastp.json
