@@ -12,8 +12,6 @@ This repository contains a modular and reproducible RNA-seq differential express
 
 ## Repository Structure
 
-## Repository Structure
-
 ```text
 rna-seq-pipeline/
 ├── data/
@@ -46,20 +44,23 @@ conda activate salmon_env
 
 ## Pipeline Components
 
-The four paired-end samples from SRP075484 were downloaded using:
-fasterq-dump --split-files SRR15074527
-fasterq-dump --split-files SRR15074528
-fasterq-dump --split-files SRR15074529
-fasterq-dump --split-files SRR15074530
-Outputs stored in data/raw/
+The four paired-end samples from SRP075484 were downloaded using:  
+fasterq-dump --split-files SRR15074527  
+fasterq-dump --split-files SRR15074528  
+fasterq-dump --split-files SRR15074529  
+fasterq-dump --split-files SRR15074530  
+Outputs stored in data/raw/  
 
-### Quality Control (FastQC + MultiQC)
-- FastQC run on all raw FASTQs: fastqc *.fastq --outdir ../qc/raw_fastqc
-- MultiQC summary (pending MultiQC install): multiqc ../qc/raw_fastqc -o ../qc/raw_multiqc
+### Quality Control (FastQC + MultiQC)  
+- FastQC run on all raw FASTQs:  
+  fastqc *.fastq --outdir ../qc/raw_fastqc  
+- MultiQC summary (pending MultiQC install):  
+  multiqc ../qc/raw_fastqc -o ../qc/raw_multiqc  
 
-### Trimming (fastp)
-Each sample was adapter- and quality-trimmed using fastp:
-fastp \
+### Trimming (fastp)  
+Each sample was adapter- and quality-trimmed using fastp:  
+``` text
+fastp \  
   -i SRR15074527_1.fastq \
   -I SRR15074527_2.fastq \
   -o ../trimmed/SRR15074527_1.trimmed.fastq \
@@ -67,6 +68,7 @@ fastp \
   --detect_adapter_for_pe \
   --html ../trimmed/SRR15074527.fastp.html \
   --json ../trimmed/SRR15074527.fastp.json
+```
 All trimmed reads stored in: data/trimmed/
 MultiQC-ready fastp reports also generated.
 
@@ -79,14 +81,17 @@ Stored in: data/reference/
 
 ### Salmon Indexing
 Index built using:
+``` text
 salmon index \
   -t gencode.v45.transcripts.fa.gz \
   -i salmon_index \
   -k 31
+```
 Index stored in:data/reference/salmon_index/
 
 ### Salmon Quantification (Alignment-Free)
 Quantified all 4 paired-end samples:
+```text
 for SRR in SRR15074527 SRR15074528 SRR15074529 SRR15074530
 do
   salmon quant \
@@ -97,14 +102,15 @@ do
     -p 8 \
     -o /Users/samilane/Documents/VSCode/Research/rna-seq-pipeline/data/quant/${SRR}
 done
+```
 
-Each sample now has a directory containing:
-quant.sf
-cmd_info.json
-lib_format_counts.json
-aux_info/
+Each sample now has a directory containing:  
+quant.sf  
+cmd_info.json  
+lib_format_counts.json  
+aux_info/  
 
-These quant.sf files will be used for DESeq2.
+These quant.sf files will be used for DESeq2.  
 
 Next Steps:
 1. Install MultiQC in working env for trimmed QC summary
