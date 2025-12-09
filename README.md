@@ -58,10 +58,10 @@ Raw FASTQ files were downloaded from ENA and processed end-to-end through the pi
 ## Directory Structure
 ```text
 rna-seq-pipeline/
-├── analysis/                 # R notebooks and exploratory work
-├── config/
+├── metadata/
 │   └── samples.tsv           # Sample metadata
 ├── data/
+|   ├── qc/
 │   ├── raw/                  # Raw FASTQs   (ignored in Git)
 │   ├── trimmed/              # fastp output (ignored)
 │   └── reference/            # Transcriptome, index, tx2gene
@@ -71,12 +71,14 @@ rna-seq-pipeline/
 │   ├── salmon/               # quant.sf outputs
 │   └── deseq2/               # PCA, heatmaps, VST, normalized counts
 ├── scripts/
-│   ├── 01_fastp_trim.sh
-│   ├── 02_salmon_index.sh
-│   ├── 03_salmon_quant.sh
-│   ├── 04_deseq2_analysis.R
-│   └── run_pipeline.sh       # Full end-to-end pipeline driver
+│   ├── qc_fastp.sh
+│   ├── salmon_index.sh
+│   ├── salmon_quant.sh
+│   ├── deseq2_analysis.R
+|   ├── multiqc.sh
+├── run_pipeline.sh           # End-to-end pipeline driver
 ├── environment.yml           # Conda environment
+├── exploratory_analysis.md   # Analysis of pipeline output  
 └── README.md
 ```
 
