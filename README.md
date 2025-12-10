@@ -17,7 +17,7 @@ conda activate rna-seq-pipeline
 ```
 3. Run the pipeline from the repo root  
 ```
-bash scripts/run_pipeline.sh
+bash run_pipeline.sh
 ```
 The pipeline performs:
 fastp QC + adapter trimming
